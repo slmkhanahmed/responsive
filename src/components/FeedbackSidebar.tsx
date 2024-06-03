@@ -5,7 +5,7 @@ import { useState } from "react";
 import { tw } from "../lib/tailwindest";
 import { CategorySelection } from "./CategorySelection";
 import { RoadmapSummary } from "./RoadmapSummary";
-const FeedbackAppName = lazy(() => import('./FeedbackAppName.js'));
+const FeedbackAppName = lazy(() => import('./FeedbackAppName'));
 const sidebar = tw.toggle({
   truthy: {
     display: "flex",

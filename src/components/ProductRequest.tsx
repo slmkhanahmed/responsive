@@ -28,8 +28,7 @@ const productRequestContainer = tw.style({
 });
 
 const upvote = tw.style({
-  gridRowStart: "row-start-3",
-  gridRowEnd: "row-end-3",
+ 
   "@tablet": {
     marginRight: "tablet:mr-[40px]",
     gridRow: "tablet:row-span-2",
@@ -40,8 +39,7 @@ const upvote = tw.style({
 });
 
 const requestLink = tw.style({
-  gridRowStart: "row-start-1",
-  gridRowEnd: "row-end-1",
+ 
   gridColumn: "col-span-2",
 
   "@tablet": {
@@ -52,13 +50,11 @@ const requestLink = tw.style({
 });
 
 const category = tw.style({
-  gridRowStart: "row-start-2",
-  gridRowEnd: "row-end-2",
+
   marginTop: "mt-[8px]",
   marginBottom: "mb-[16px]",
   "@tablet": {
-    gridRowStart: "tablet:row-start-2",
-    gridRowEnd: "tablet:row-end-2",
+   
     gridColumnStart: "tablet:col-start-2",
     gridColumnEnd: "tablet:col-end-2",
     marginBottom: "tablet:mb-[0px]",
@@ -71,8 +67,7 @@ const commentIconContainer = tw.style({
   alignItems: "items-center",
   gap: "gap-1",
   placeSelf: "place-self-center",
-  gridRowStart: "row-start-3",
-  gridRowEnd: "row-end-3",
+  
   "@tablet": {
     gridRow: "tablet:row-span-2",
   },

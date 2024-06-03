@@ -26,8 +26,7 @@ const titleBar = tw.style({
     marginTop: "desktop:mt-0",
     gridColumnStart: "desktop:col-start-2",
     gridColumnEnd: "desktop:col-end-2",
-    gridRowStart: "desktop:row-start-1",
-    gridRowEnd: "desktop:row-end-1",
+   
   },
 });
 export function SuggestionsTitleBar() {

@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  @variants responsive {
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+  }
+}
+
+h1 {
+  @apply text-2xl leading-[35px] font-bold -tracking-[.021em];
+}
+
+h2 {
+  @apply text-xl leading-[29px] font-bold -tracking-[.016em];
+}
+
+h3 {
+  @apply text-lg leading-[26px] font-bold -tracking-[.016em];
+}
+
+h4 {
+  @apply text-sm leading-5 font-bold -tracking-[.013em];
+}
+
+body {
+  @apply bg-gray-light
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import initial_data from "./public/data.json";
 import { FeedbackSidebar } from "./components/FeedbackSidebar";
 import { NoFeedbackPage } from "./components/NoFeedbackPage";
@@ -6,6 +5,8 @@ import { ProductRequestList } from "./components/ProductRequestList";
 import { SuggestionsTitleBar } from "./components/SuggestionsTitleBar";
 import SortOrderProvider from "./contexts/SortProvider";
 import CategoriesProvider from "./contexts/categoriesProvider";
+import useLocalStorageState from "use-local-storage-state";
+
 import { tw } from "./lib/tailwindest";
 
 
@@ -27,24 +28,27 @@ const layout = tw.style({
   },
 });
 function App() {
+  const [data, setData] = useLocalStorageState("data", {
+    defaultValue: initial_data,
+  });
   return (
-   <main>
+    <main>
     <SortOrderProvider>
       <CategoriesProvider>
-      <div className={layout.class}>
-        <FeedbackSidebar />
-        <SuggestionsTitleBar />
-        <div className="mt-[16px] tablet:mt-0">{data.productRequests.length > 0 ? (
-                <ProductRequestList />
-              ) : (
-                <NoFeedbackPage />
-              )}
-            </div>
-      
-      </div>
+        <div className={layout.class}>
+          <FeedbackSidebar />
+          <SuggestionsTitleBar />
+          <div className="mt-[16px] tablet:mt-0">
+            {data.productRequests.length > 0 ? (
+              <ProductRequestList />
+            ) : (
+              <NoFeedbackPage />
+            )}
+          </div>
+        </div>
       </CategoriesProvider>
     </SortOrderProvider>
-   </main>
+  </main>
   );
 }
 
