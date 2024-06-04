@@ -1,4 +1,3 @@
-"use client";
 import { useRouter } from "next/navigation";
 import { GetVariants, Tailwindest } from "tailwindest";
 import Button, { coloredButton } from "./Button";

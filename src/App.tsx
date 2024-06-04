@@ -6,7 +6,6 @@ import { SuggestionsTitleBar } from "./components/SuggestionsTitleBar";
 import SortOrderProvider from "./contexts/SortProvider";
 import CategoriesProvider from "./contexts/categoriesProvider";
 import useLocalStorageState from "use-local-storage-state";
-
 import { tw } from "./lib/tailwindest";
 
 

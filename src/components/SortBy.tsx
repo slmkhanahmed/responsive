@@ -1,4 +1,3 @@
-"use client";
 import { useContext, useState } from "react";
 import { SortOrderContexts } from "../contexts/SortProvider";
 import { capitalize } from "../lib/helpers";

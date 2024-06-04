@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { capitalize } from "../lib/helpers";
 import { tw } from "../lib/tailwindest";

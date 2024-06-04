@@ -1,4 +1,3 @@
-"use client";
 import initial_data from "../public/data.json";
 import { useContext } from "react";
 import useLocalStorageState from "use-local-storage-state";

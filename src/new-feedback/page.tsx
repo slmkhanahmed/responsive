@@ -1,14 +1,14 @@
+import initial_data from "../public/data.json";
+import PlusIcon from "../public/plus.svg";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import useLocalStorageState from "use-local-storage-state";
 import BackButton from "../components/BackButton";
 import Button from "../components/Button";
 import { Dropdown } from "../components/Dropdown";
 import { TextField } from "../components/TextField";
 import { tw } from "../lib/tailwindest";
-import initial_data from "../public/data.json";
-import PenIcon from "../public/pen.svg";
-import { notFound, useRouter } from "next/navigation";
-import { useRef, useState } from "react";
-import toast from "react-hot-toast";
-import useLocalStorageState from "use-local-storage-state";
 
 const formPage = tw.style({
   marginX: "mx-[25px]",
@@ -62,81 +62,63 @@ const sectionDesc = tw.style({
   color: "text-gray-dark",
 });
 
-export default function EditFeedback({
-  params: { "feedback-id": productRequestId },
-}: {
-  params: { "feedback-id": string };
-}) {
+const Categories = ["Feature", "UI", "UX", "Enhancement", "Bug"];
+
+export default function NewFeedback() {
   const [data, setData] = useLocalStorageState("data", {
     defaultValue: initial_data,
   });
-  const productRequest = data.productRequests.find(
-    (pr) => pr.id.toString() === productRequestId,
-  );
-  if (!productRequest) {
-    notFound();
-  }
+  const [title, setTitle] = useState("");
   const router = useRouter();
-  const [title, setTitle] = useState(productRequest.title);
   const [titleError, setTitleError] = useState<string | undefined>();
   const titleRef = useRef(null);
-  const [desc, setDesc] = useState(productRequest.description);
-  const [category, setCategory] = useState<string>(productRequest.category);
-  const [status, setStatus] = useState<string>(productRequest.status);
+  const [category, setCategory] = useState<string | undefined>(Categories[0]);
+  const [feedbackDetail, setFeedbackDetail] = useState("");
 
-  const DeleteFeedback = () => {
-    data.productRequests = data.productRequests.filter(
-      (pr) => pr.id.toString() !== productRequestId,
-    );
-    toast.success("Feedback deleted successfully!");
-    setData(data);
-    router.back();
-    router.back();
-  };
-
-  const EditFeedback = () => {
+  const AddFeedback = () => {
     if (title.length < 5) {
       setTitleError("Title must be at least 5 characters long");
       /* @ts-ignore */
       titleRef.current?.focus();
       return;
     }
-    const productRequest = data.productRequests.find(
-      (pr) => pr.id.toString() === productRequestId,
-    );
-    if (!productRequest) {
-      notFound();
-    }
-    productRequest.title = title;
-    productRequest.category = category;
-    productRequest.status = status;
-    productRequest.description = desc;
+    data.productRequests.push({
+      id:
+        data.productRequests.length === 0
+          ? 1
+          : data.productRequests.length === 1
+            ? data.productRequests[0].id + 1
+            : data.productRequests.reduce((a, b) => (a.id > b.id ? a : b)).id +
+              1,
+      title: title,
+      category: category ?? "",
+      upvotes: 0,
+      status: "suggestion",
+      description: feedbackDetail,
+      comments: [],
+    });
     setData(data);
     toast.dismiss();
-    toast.success("Feedback edited successfully!");
+    toast.success("Feedback added successfully!");
   };
   return (
     <div className={formPage.class}>
+      <Toaster />
       <div className={back.class}>
         <BackButton color="gray">Go Back</BackButton>
       </div>
       <div className={form.class}>
-        <img
-          className="absolute -top-5 left-5"
-          src={PenIcon}
-          alt="pen icon"
-        />
-        <div className={heading.class}>
-          Editing &apos;{productRequest.title}&apos;
-        </div>
+        <img className="absolute -top-5 left-5" src={PlusIcon} alt="+ icon" />
+        <div className={heading.class}>Create New Feedback</div>
         <div className={section.class}>
           <span className={sectionTitle.class}>Feedback Title</span>
           <span className={sectionDesc.class}>
             Add a short, descriptive headline
           </span>
           <TextField
-            value={title}
+            ref={titleRef}
             errorMessage={titleError}
+            value={title}
             isError={titleError !== undefined}
             onChange={(e) => {
               setTitle(e.target.value);
@@ -158,21 +140,8 @@ export default function EditFeedback({
               onChange={(option) => {
                 setCategory(option);
               }}
-              defaultOption={productRequest.category}
-              options={["Feature", "UI", "UX", "Enhancement", "Bug"]}
-            />
-          </div>
-        </div>
-        <div className={section.class}>
-          <span className={sectionTitle.class}>Update Status</span>
-          <span className={sectionDesc.class}>Change feature state</span>
-          <div className="relative">
-            <Dropdown
-              onChange={(option) => {
-                setStatus(option);
-              }}
-              defaultOption={productRequest.status}
-              options={["planned", "in-progress", "live"]}
+              options={Categories}
+              defaultOption={Categories[0]}
             />
           </div>
         </div>
@@ -184,23 +153,18 @@ export default function EditFeedback({
           </span>
           <textarea
             className="h-[120px] resize-none bg-gray  p-4 rounded-lg active:outline-blue focus:outline-blue"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-            name=""
-            id=""
+            value={feedbackDetail}
+            onChange={(e) => setFeedbackDetail(e.target.value)}
             cols={5}
             rows={10}
           />
         </div>
-        <div className="flex flex-col gap-[16px] tablet:flex-row-reverse tablet:justify-between">
-          <div className="flex flex-col gap-[16px] tablet:flex-row-reverse tablet:justify-start">
-            <Button onClick={EditFeedback} color="purple">
-              Save Changes
-            </Button>
-            <Button color="dark-blue">Cancel</Button>
-          </div>
-          <Button onClick={DeleteFeedback} color="red">
-            Delete
+        <div className="flex flex-col gap-[16px] tablet:flex-row-reverse tablet:justify-start">
+          <Button onClick={AddFeedback} color="purple">
+            Add Feedback
+          </Button>
+          <Button onClick={() => router.back()} color="dark-blue">
+            Cancel
           </Button>
         </div>
       </div>
