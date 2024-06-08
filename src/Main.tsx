@@ -9,6 +9,7 @@ import CategoriesProvider from "./contexts/categoriesProvider";
 import useLocalStorageState from "use-local-storage-state";
 import { tw } from "./lib/tailwindest";
 import { useEffect, useState } from "react";
+import { setEmitFlags } from "typescript";
 
 
 const layout = tw.style({
@@ -48,6 +49,14 @@ export const Main = () => {
                 <NoFeedbackPage />
               )}
             </div>
+            <button onClick={
+                () => {
+                    setData({...data, currentUser: {...data.currentUser, name: 'Adnan'}});
+                    localStorage.setItem('data', JSON.stringify(data));
+                }
+            }>
+            Change Data
+            </button>
           </div>
         </CategoriesProvider>
       </SortOrderProvider>)
