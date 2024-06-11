@@ -3,13 +3,8 @@ import { ProductRequest } from "../../components/ProductRequest";
 import { tw } from "../../lib/tailwindest";
 import initial_data from "../../public/data.json";
 import useLocalStorageState from "use-local-storage-state";
-import { useParams } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
-const notFound = () =>{  
-}
-return(
-  <p>page not found</p>
-);
 
 const form = tw.style({
   borderRadius: "rounded-lg",
@@ -40,7 +35,7 @@ const ProductRequestDetail = () => {
     (pr) => pr.id.toString() === productRequestId,
   );
   if (!productRequest) {
-    notFound();
+   return <Redirect to="/404" />;
   }
 
   return (

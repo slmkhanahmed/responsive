@@ -6,10 +6,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
   Link,
   useParams
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import ProductRequestDetail from './product-request/[product-request-id]/page';
+import PageNotFound from "./components/PageNotFound";
 
 
 function App() {
@@ -26,7 +29,9 @@ function App() {
         <Route path="/"> <App /></Route>
         <Route path="/new-feedback" children={<NewFeedback />} />
         <Route path="/edit-feedback/:feedback-id"><EditFeedback /></Route>
-        <Route path="/product-request/:product-request-id"><ProductRequest /></Route>
+        <Route path="/product-request/:product-request-id"><ProductRequestDetail /></Route>
+        <Route exact path="/404"> <PageNotFound />
+</Route>
       </Switch> 
     </div>
  </Router>
