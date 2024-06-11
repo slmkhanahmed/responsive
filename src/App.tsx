@@ -1,21 +1,36 @@
-import { Route, useParams } from "react-router-dom";
-import { Main } from "./Main";
-import ProductRequestDetail from './product-request/[product-request-id]/page';
+import EditFeedback from "./[feedback-id]/page";
+import { Main } from './Main';
+import NewFeedback from './new-feedback/page';
+import { ProductRequest } from './components/ProductRequest';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-const ProductRequestDetail = () => {
-  const { 'product-request-id': productRequestId } = useParams<{'product-request-id': string}>();
-  
-  return  ;
-};
 
 function App() {
 
   return (
-    <Route> 
-      <main>
+    <>
+    <Toaster />
+       <Router>
+      <div>
+        <main>
         <Main />
       </main>
-    </Route>
+      <Switch>
+        <Route path="/"> <App /></Route>
+        <Route path="/new-feedback" children={<NewFeedback />} />
+        <Route path="/edit-feedback/:feedback-id"><EditFeedback /></Route>
+        <Route path="/product-request/:product-request-id"><ProductRequest /></Route>
+      </Switch> 
+    </div>
+ </Router>
+    </>
  
   );
 }

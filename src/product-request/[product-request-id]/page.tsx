@@ -3,7 +3,7 @@ import { ProductRequest } from "../../components/ProductRequest";
 import { tw } from "../../lib/tailwindest";
 import initial_data from "../../public/data.json";
 import useLocalStorageState from "use-local-storage-state";
-import { Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const notFound = () =>{  
 }
