@@ -2,8 +2,14 @@ import { Comment, CommentArea } from "../../components/Comment & Reply";
 import { ProductRequest } from "../../components/ProductRequest";
 import { tw } from "../../lib/tailwindest";
 import initial_data from "../../public/data.json";
-import { notFound } from "next/navigation";
 import useLocalStorageState from "use-local-storage-state";
+import { Route, useParams } from "react-router-dom";
+
+const notFound = () =>{  
+}
+return(
+  <p>page not found</p>
+);
 
 const form = tw.style({
   borderRadius: "rounded-lg",
@@ -27,15 +33,10 @@ const comments = tw.style({
   backgroundColor: "bg-white",
 });
 
-export default function ProductRequestDetail({
-  params: { "product-request-id": productRequestId },
-}: {
-  params: { "product-request-id": string };
-}) {
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
-  const productRequest = data.productRequests.find(
+export default 
+const ProductRequestDetail = () => {
+  const { 'product-request-id': productRequestId } = useParams<{'product-request-id': string}>();
+  const productRequest = initial_data.productRequests.find(
     (pr) => pr.id.toString() === productRequestId,
   );
   if (!productRequest) {

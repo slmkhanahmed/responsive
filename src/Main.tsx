@@ -6,7 +6,8 @@ import { ProductRequestList } from "./components/ProductRequestList";
 import { SuggestionsTitleBar } from "./components/SuggestionsTitleBar";
 import SortOrderProvider from "./contexts/SortProvider";
 import CategoriesProvider from "./contexts/categoriesProvider";
-import useLocalStorageState from "use-local-storage-state";
+import {useLocalStorage} from './lib/useLocalStorage';
+
 import { tw } from "./lib/tailwindest";
 import { useEffect, useState } from "react";
 import { setEmitFlags } from "typescript";
@@ -28,36 +29,24 @@ const layout = tw.style({
     marginX: "tablet:mx-auto",
     marginBottom: "tablet:mb-[113px]",
   },
-}); 
+});
+
 export const Main = () => {
-    const [data, setData]=  useState(initial_data);
-    useEffect(() => {
-        const data = localStorage.getItem('data');
-        if (data) {
-            setData(JSON.parse(data));
-        }
-    }, []);
-    return (   <SortOrderProvider>
-        <CategoriesProvider>
-          <div className={layout.class}>
-            <FeedbackSidebar />
-            <SuggestionsTitleBar />
-            <div className="mt-[16px] tablet:mt-0">
-              {data.productRequests.length > 0 ? (
-                <ProductRequestList />
-              ) : (
-                <NoFeedbackPage />
-              )}
-            </div>
-            <button onClick={
-                () => {
-                    setData({...data, currentUser: {...data.currentUser, name: 'Adnan'}});
-                    localStorage.setItem('data', JSON.stringify(data));
-                }
-            }>
-            Change Data
-            </button>
-          </div>
-        </CategoriesProvider>
-      </SortOrderProvider>)
+  const {data, setData} = useLocalStorage(initial_data);
+
+  return (<SortOrderProvider>
+    <CategoriesProvider>
+      <div className={layout.class}>
+        <FeedbackSidebar />
+        <SuggestionsTitleBar />
+        <div className="mt-[16px] tablet:mt-0">
+          {data?.productRequests.length > 0 ? (
+            <ProductRequestList />
+          ) : (
+            <NoFeedbackPage />
+          )}
+        </div>
+      </div>
+    </CategoriesProvider>
+  </SortOrderProvider>)
 }
