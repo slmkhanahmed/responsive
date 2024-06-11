@@ -28,7 +28,6 @@ const comments = tw.style({
   backgroundColor: "bg-white",
 });
 
-export default 
 const ProductRequestDetail = () => {
   const { 'product-request-id': productRequestId } = useParams<{'product-request-id': string}>();
   const productRequest = initial_data.productRequests.find(
@@ -58,3 +57,5 @@ const ProductRequestDetail = () => {
     </section>
   );
 }
+
+export default ProductRequestDetail;

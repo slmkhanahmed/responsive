@@ -9,6 +9,7 @@ import { notFound, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import useLocalStorageState from "use-local-storage-state";
+import { useParams } from 'react-router-dom';
 
 const formPage = tw.style({
   marginX: "mx-[25px]",
@@ -62,11 +63,14 @@ const sectionDesc = tw.style({
   color: "text-gray-dark",
 });
 
-export default function EditFeedback({
-  params: { "feedback-id": productRequestId },
-}: {
-  params: { "feedback-id": string };
-}) {
+// {
+//   params: { "feedback-id": productRequestId },
+// }: {
+//   params: { "feedback-id": string };
+// }
+export default function EditFeedback() {
+const {"feedback-id": productRequestId } = useParams<{"feedback-id": string}>();
+
   const [data, setData] = useLocalStorageState("data", {
     defaultValue: initial_data,
   });
