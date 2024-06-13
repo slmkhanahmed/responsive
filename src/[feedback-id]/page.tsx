@@ -8,8 +8,8 @@ import PenIcon from "../public/pen.svg";
 import { notFound, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import useLocalStorageState from "use-local-storage-state";
 import { useParams } from 'react-router-dom';
+import { useLocalStorage } from '../lib/useLocalStorage';
 
 const formPage = tw.style({
   marginX: "mx-[25px]",
@@ -71,9 +71,7 @@ const sectionDesc = tw.style({
 export default function EditFeedback() {
 const {"feedback-id": productRequestId } = useParams<{"feedback-id": string}>();
 
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+const { data, setData } = useLocalStorage(initial_data);
   const productRequest = data.productRequests.find(
     (pr) => pr.id.toString() === productRequestId,
   );

@@ -1,10 +1,10 @@
 import initial_data from "../public/data.json";
 import { useContext } from "react";
-import useLocalStorageState from "use-local-storage-state";
 import { CategoriesContexts } from "../contexts/categoriesProvider";
 import { capitalize } from "../lib/helpers";
 import { tw } from "../lib/tailwindest";
 import { LinkButton } from "./LinkButton";
+import { useLocalStorage } from '../lib/useLocalStorage';
 
 const categoriesContainer = tw.style({
   display: "flex",
@@ -18,10 +18,10 @@ const categoriesContainer = tw.style({
   borderRadius: "rounded-xl",
   justifyItems: "justify-items-start",
 });
+
 export function CategorySelection() {
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { data } = useLocalStorage(initial_data);
+
   const categories = ["All"]
     .concat([
       ...new Set(
@@ -29,6 +29,7 @@ export function CategorySelection() {
       ),
     ])
     .sort((a, b) => a.localeCompare(b));
+
   return (
     <div className="h-[178px] bg-white rounded-xl w-[223px] desktop:w-[255px] overflow-y-auto no-scrollbar">
       <div className={categoriesContainer.class}>
@@ -43,6 +44,7 @@ export function CategorySelection() {
 export function CategorySelector({ category }: { category: string }) {
   const { categories: selectedCategories, setCategories } =
     useContext(CategoriesContexts);
+    
   const LinkButtonClick = (category: string) => {
     if (!setCategories) return;
     if (category === "All") {
@@ -66,10 +68,11 @@ export function CategorySelector({ category }: { category: string }) {
       }
     }
   };
+
   return (
     <LinkButton
       activated={selectedCategories.includes(category)}
-      onClick={LinkButtonClick}
+      onClick={() => LinkButtonClick(category)}
       key={category}
     >
       {capitalize(category)}
