@@ -2,7 +2,7 @@ import BackButton from "../../components/BackButton";
 import Button from "../../components/Button";
 import { tw } from "../../lib/tailwindest";
 import initial_data from "../../public/data.json";
-import useLocalStorageState from "use-local-storage-state";
+import { useLocalStorage } from '../../lib/useLocalStorage';
 const navbar = tw.style({
   display: "flex",
   justifyContent: "justify-between",
@@ -16,9 +16,8 @@ const navbar = tw.style({
   },
 });
 export function Navbar({ productRequestId }: { productRequestId: string }) {
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { data, setData } = useLocalStorage(initial_data);
+
   const productRequest = data.productRequests.find(
     (pr) => pr.id.toString() === productRequestId,
   );
