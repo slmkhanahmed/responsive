@@ -3,12 +3,12 @@ import PlusIcon from "../public/plus.svg";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import useLocalStorageState from "use-local-storage-state";
 import BackButton from "../components/BackButton";
 import Button from "../components/Button";
 import { Dropdown } from "../components/Dropdown";
 import { TextField } from "../components/TextField";
 import { tw } from "../lib/tailwindest";
+import { useLocalStorage } from '../lib/useLocalStorage';
 
 const formPage = tw.style({
   marginX: "mx-[25px]",
@@ -65,9 +65,8 @@ const sectionDesc = tw.style({
 const Categories = ["Feature", "UI", "UX", "Enhancement", "Bug"];
 
 export default function NewFeedback() {
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { data, setData } = useLocalStorage(initial_data);
+
   const [title, setTitle] = useState("");
   const router = useRouter();
   const [titleError, setTitleError] = useState<string | undefined>();
