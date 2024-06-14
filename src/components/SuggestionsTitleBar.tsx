@@ -1,9 +1,9 @@
 import bulb from "../public/bulb.svg";
 import initial_data from "../public/data.json";
-import useLocalStorageState from "use-local-storage-state";
 import { tw } from "../lib/tailwindest";
 import Button from "./Button";
 import { SortBy } from "./SortBy";
+import { useLocalStorage } from '../lib/useLocalStorage';
 const titleBar = tw.style({
   display: "flex",
   position: "relative",
@@ -30,9 +30,8 @@ const titleBar = tw.style({
   },
 });
 export function SuggestionsTitleBar() {
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { data, setData } = useLocalStorage(initial_data);
+
   return (
     <div className={titleBar.class}>
       <div className="flex justify-center items-center">
