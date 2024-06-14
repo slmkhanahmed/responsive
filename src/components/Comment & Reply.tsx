@@ -8,9 +8,9 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import useLocalStorageState from "use-local-storage-state";
 import { tw } from "../lib/tailwindest";
 import Button from "./Button";
+import { useLocalStorage } from '../lib/useLocalStorage';
 
 const comment_box = tw.style({
   paddingBottom: "pb-[32px]",
@@ -111,10 +111,10 @@ function ReplyForm({
   setShowReplyForm?: (show: boolean) => void;
 }) {
   const [reply, setReply] = useState("");
-  const { "product-request-id": productRequestId } = useParams();
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { 'product-request-id': productRequestId } = useParams<{ 'product-request-id': string }>();
+
+  const { data, setData } = useLocalStorage(initial_data);
+
   const post = data.productRequests.find(
     (pr) => pr?.id.toString() === productRequestId,
   );
@@ -225,10 +225,10 @@ const commentarea = tw.style({
 
 export function CommentArea() {
   const [comment, setComment] = useState("");
-  const { "product-request-id": productRequestId } = useParams();
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { 'product-request-id': productRequestId } = useParams<{ 'product-request-id': string }>();
+
+  const { data, setData } = useLocalStorage(initial_data);
+
   const post = data.productRequests.find(
     (pr) => pr?.id.toString() === productRequestId,
   );

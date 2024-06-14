@@ -1,10 +1,10 @@
 
 import commentIcon from "../public/comment.svg";
 import initial_data from "../public/data.json";
-import useLocalStorageState from "use-local-storage-state";
 import { tw } from "../lib/tailwindest";
 import { CategorySelector } from "./CategorySelection";
 import { LinkButton } from "./LinkButton";
+import { useLocalStorage } from '../lib/useLocalStorage';
 
 export type ProductRequest = (typeof initial_data.productRequests)[number];
 const productRequestContainer = tw.style({
@@ -91,9 +91,8 @@ export function ProductRequest({
 }: {
   productRequest: ProductRequest;
 }) {
-  const [data, setData] = useLocalStorageState("data", {
-    defaultValue: initial_data,
-  });
+  const { data, setData } = useLocalStorage(initial_data);
+
   const UpvoteFeedback = () => {
     const post = data.productRequests.find((pr) => pr.id === productRequest.id);
     if (!post) return;
