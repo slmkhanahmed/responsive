@@ -1,4 +1,3 @@
-
 import initial_data from "./public/data.json";
 import { FeedbackSidebar } from "./components/FeedbackSidebar";
 import { NoFeedbackPage } from "./components/NoFeedbackPage";
@@ -7,10 +6,7 @@ import { SuggestionsTitleBar } from "./components/SuggestionsTitleBar";
 import SortOrderProvider from "./contexts/SortProvider";
 import CategoriesProvider from "./contexts/categoriesProvider";
 import {useLocalStorage} from './lib/useLocalStorage';
-
 import { tw } from "./lib/tailwindest";
-import { useEffect, useState } from "react";
-import { setEmitFlags } from "typescript";
 
 
 const layout = tw.style({

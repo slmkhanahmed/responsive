@@ -2,7 +2,6 @@ import { Comment, CommentArea } from "../../components/Comment & Reply";
 import { ProductRequest } from "../../components/ProductRequest";
 import { tw } from "../../lib/tailwindest";
 import initial_data from "../../public/data.json";
-import useLocalStorageState from "use-local-storage-state";
 import { Redirect, useParams } from "react-router-dom";
 
 
