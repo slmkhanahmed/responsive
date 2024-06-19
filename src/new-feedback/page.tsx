@@ -1,6 +1,6 @@
 import initial_data from "../public/data.json";
 import PlusIcon from "../public/plus.svg";
-import { useRouter } from "next/navigation";
+
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import BackButton from "../components/BackButton";
@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import { Dropdown } from "../components/Dropdown";
 import { TextField } from "../components/TextField";
 import { tw } from "../lib/tailwindest";
-import { useLocalStorage } from '../lib/useLocalStorage';
+import { useLocalStorage } from "../lib/useLocalStorage";
 
 const formPage = tw.style({
   marginX: "mx-[25px]",
@@ -68,7 +68,6 @@ export default function NewFeedback() {
   const { data, setData } = useLocalStorage(initial_data);
 
   const [title, setTitle] = useState("");
-  const router = useRouter();
   const [titleError, setTitleError] = useState<string | undefined>();
   const titleRef = useRef(null);
   const [category, setCategory] = useState<string | undefined>(Categories[0]);
@@ -162,7 +161,7 @@ export default function NewFeedback() {
           <Button onClick={AddFeedback} color="purple">
             Add Feedback
           </Button>
-          <Button onClick={() => router.back()} color="dark-blue">
+          <Button onClick={() => window.history.back()} color="dark-blue">
             Cancel
           </Button>
         </div>

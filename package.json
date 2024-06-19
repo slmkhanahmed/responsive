@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@kodingdotninja/use-tailwind-breakpoint": "github:kodingdotninja/use-tailwind-breakpoint",
+    "@kodingdotninja/use-tailwind-breakpoint": "^1.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,7 +11,6 @@
     "@types/node": "^16.18.97",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "next": "^14.2.3",
     "react": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^5.3.4",
@@ -41,10 +40,14 @@
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.3",
-    "eslint-plugin-react": "^7.34.2",
     "@types/react-router-dom": "^5.3.3",
+    "eslint-plugin-react": "^7.34.2",
     "globals": "^15.4.0",
     "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.4",
     "typescript-eslint": "^7.13.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }

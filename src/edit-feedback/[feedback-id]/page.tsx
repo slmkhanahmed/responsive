@@ -1,15 +1,14 @@
-import BackButton from "../components/BackButton";
-import Button from "../components/Button";
-import { Dropdown } from "../components/Dropdown";
-import { TextField } from "../components/TextField";
-import { tw } from "../lib/tailwindest";
-import initial_data from "../public/data.json";
-import PenIcon from "../public/pen.svg";
-import { notFound, useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from 'react-router-dom';
-import { useLocalStorage } from '../lib/useLocalStorage';
+import { Redirect, useParams } from "react-router-dom";
+import BackButton from "../../components/BackButton";
+import Button from "../../components/Button";
+import { Dropdown } from "../../components/Dropdown";
+import { TextField } from "../../components/TextField";
+import { tw } from "../../lib/tailwindest";
+import { useLocalStorage } from "../../lib/useLocalStorage";
+import initial_data from "../../public/data.json";
+import PenIcon from "../../public/pen.svg";
 
 const formPage = tw.style({
   marginX: "mx-[25px]",
@@ -69,34 +68,34 @@ const sectionDesc = tw.style({
 //   params: { "feedback-id": string };
 // }
 export default function EditFeedback() {
-const {"feedback-id": productRequestId } = useParams<{"feedback-id": string}>();
+  const { "feedback-id": productRequestId } = useParams<{
+    "feedback-id": string;
+  }>();
 
-const { data, setData } = useLocalStorage(initial_data);
+  const { data, setData } = useLocalStorage(initial_data);
   const productRequest = data.productRequests.find(
     (pr) => pr.id.toString() === productRequestId,
   );
-  if (!productRequest) {
-    notFound();
-  }
-  const router = useRouter();
-  const [title, setTitle] = useState(productRequest.title);
+
+  const [title, setTitle] = useState(productRequest?.title);
   const [titleError, setTitleError] = useState<string | undefined>();
   const titleRef = useRef(null);
-  const [desc, setDesc] = useState(productRequest.description);
-  const [category, setCategory] = useState<string>(productRequest.category);
-  const [status, setStatus] = useState<string>(productRequest.status);
-
+  const [desc, setDesc] = useState(productRequest?.description);
+  const [category, setCategory] = useState(productRequest?.category);
+  const [status, setStatus] = useState(productRequest?.status);
+  if (!productRequest) {
+    return <Redirect to="/404" />;
+  }
   const DeleteFeedback = () => {
     data.productRequests = data.productRequests.filter(
       (pr) => pr.id.toString() !== productRequestId,
     );
     toast.success("Feedback deleted successfully!");
     setData(data);
-    router.back();
-    router.back();
+    window.history.go(-2);
   };
-
   const EditFeedback = () => {
+    if (!title || !category || !status) return;
     if (title.length < 5) {
       setTitleError("Title must be at least 5 characters long");
       /* @ts-ignore */
@@ -106,13 +105,11 @@ const { data, setData } = useLocalStorage(initial_data);
     const productRequest = data.productRequests.find(
       (pr) => pr.id.toString() === productRequestId,
     );
-    if (!productRequest) {
-      notFound();
-    }
+    if (!productRequest) return;
     productRequest.title = title;
     productRequest.category = category;
     productRequest.status = status;
-    productRequest.description = desc;
+    productRequest.description = desc || "";
     setData(data);
     toast.dismiss();
     toast.success("Feedback edited successfully!");
@@ -123,11 +120,7 @@ const { data, setData } = useLocalStorage(initial_data);
         <BackButton color="gray">Go Back</BackButton>
       </div>
       <div className={form.class}>
-        <img
-          className="absolute -top-5 left-5"
-          src={PenIcon}
-          alt="pen icon"
-        />
+        <img className="absolute -top-5 left-5" src={PenIcon} alt="pen icon" />
         <div className={heading.class}>
           Editing &apos;{productRequest.title}&apos;
         </div>

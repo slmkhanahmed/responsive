@@ -1,38 +1,42 @@
 import { Toaster } from "react-hot-toast";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch
-} from "react-router-dom";
-import EditFeedback from "./[feedback-id]/page";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
-import { Main } from './Main';
-import NewFeedback from './new-feedback/page';
-import ProductRequestDetail from './product-request/[product-request-id]/page';
-
+import EditFeedback from "./edit-feedback/[feedback-id]/page";
+import { Main } from "./Main";
+import NewFeedback from "./new-feedback/page";
+import ProductRequestDetailLayout from "./product-request/[product-request-id]/layout";
+import ProductRequestNotFound from "./product-request/[product-request-id]/not-found";
+import ProductRequestDetail from "./product-request/[product-request-id]/page";
 
 function App() {
-
   return (
     <>
       <Toaster />
       <Router>
-        <div>
-          <main>
+        <Switch>
+          <Route path="/">
             <Main />
-          </main>
-          <Switch>
-            <Route path="/"> <App /></Route>
-            <Route path="/new-feedback" children={<NewFeedback />} />
-            <Route path="/edit-feedback/:feedback-id"><EditFeedback /></Route>
-            <Route path="/product-request/:product-request-id"><ProductRequestDetail /></Route>
-            <Route exact path="/404"> <PageNotFound />
-            </Route>
-          </Switch>
-        </div>
+          </Route>
+          <Route path="/new-feedback" children={<NewFeedback />} />
+          <Route path="/edit-feedback/:feedback-id">
+            <EditFeedback />
+          </Route>
+          <Route path={"/product-request/not-found"} exact>
+            <ProductRequestDetailLayout>
+              <ProductRequestNotFound />
+            </ProductRequestDetailLayout>
+          </Route>
+          <Route path="/product-request/:product-request-id">
+            <ProductRequestDetailLayout>
+              <ProductRequestDetail />
+            </ProductRequestDetailLayout>
+          </Route>
+          <Route exact path="/404">
+            <PageNotFound />
+          </Route>
+        </Switch>
       </Router>
     </>
-
   );
 }
 

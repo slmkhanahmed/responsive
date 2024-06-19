@@ -1,5 +1,6 @@
-import { tw } from "../../lib/tailwindest";
 import { ReactNode } from "react";
+import { useParams } from "react-router-dom";
+import { tw } from "../../lib/tailwindest";
 import { Navbar } from "./Navbar";
 
 const formPage = tw.style({
@@ -14,13 +15,10 @@ const formPage = tw.style({
   },
 });
 
-export default function Layout({
-  children,
-  params: { "product-request-id": productRequestId },
-}: {
-  children: ReactNode;
-  params: { "product-request-id": string };
-}) {
+export default function Layout({ children }: { children: ReactNode }) {
+  const { "product-request-id": productRequestId } = useParams<{
+    "product-request-id": string;
+  }>();
   return (
     <div className={formPage.class}>
       <Navbar productRequestId={productRequestId} />

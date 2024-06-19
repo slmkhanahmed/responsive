@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { GetVariants, Tailwindest } from "tailwindest";
 import Button, { coloredButton } from "./Button";
 
@@ -11,9 +10,13 @@ function BackButton({
   height?: Tailwindest["height"];
   className?: string;
 }>) {
-  const router = useRouter();
   return (
-    <Button height={height} color={color} icon onClick={() => router.back()}>
+    <Button
+      height={height}
+      color={color}
+      icon
+      onClick={() => window.history.back()}
+    >
       {children}
     </Button>
   );

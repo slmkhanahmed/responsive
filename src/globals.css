@@ -50,6 +50,12 @@ h4 {
   @apply text-sm leading-5 font-bold -tracking-[.013em];
 }
 
+@font-face {
+  font-family: 'Jost';
+  src: url(/public/Jost-VariableFont_wght.ttf) format('truetype');
+}
+
 body {
+  font-family: 'Jost', sans-serif;
   @apply bg-gray-light
 }
