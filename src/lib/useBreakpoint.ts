@@ -1,5 +1,9 @@
 import { create } from "@kodingdotninja/use-tailwind-breakpoint";
 
-import screens from "../tailwind.screens.js";
 
+const screens = {
+    tablet: '768px',
+    mobile: '375px',
+    desktop: '1440px'
+};
 export const { useBreakpoint } = create(screens);
