@@ -16,9 +16,7 @@ const formPage = tw.style({
 });
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { "product-request-id": productRequestId } = useParams<{
-    "product-request-id": string;
-  }>();
+  const { productRequestId } = useParams<{ productRequestId: string }>();
   return (
     <div className={formPage.class}>
       <Navbar productRequestId={productRequestId} />

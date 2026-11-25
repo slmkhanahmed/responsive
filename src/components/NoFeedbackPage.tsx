@@ -57,9 +57,9 @@ export function NoFeedbackPage() {
         Got a suggestion? Found a bug that needs to be squashed? We love hearing
         about new ideas to improve our app.
       </span>
-      <a href={"/new-feedback"} className={addFeedback.class}>
-        <Button color="purple">+ Add Feedback</Button>
-      </a>
+      <div className={addFeedback.class}>
+        <Button to="/new-feedback" color="purple">+ Add Feedback</Button>
+      </div>
     </div>
   );
 }

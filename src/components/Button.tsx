@@ -1,4 +1,5 @@
 import { MouseEventHandler, ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { GetVariants, Tailwindest } from "tailwindest";
 import { tw } from "../lib/tailwindest";
 import { LeftArrow } from "./LeftArrow";
@@ -69,6 +70,7 @@ export const coloredButton = tw.rotary({
 
 const Button = ({
   onClick,
+  to,
   height,
   color,
   icon = false,
@@ -78,24 +80,28 @@ const Button = ({
   color: GetVariants<typeof coloredButton>;
   icon?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  to?: string;
   children: ReactNode;
 }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={tw.mergeProps(
-        button.style(["white", "gray"].includes(color)),
-        coloredButton
-          .compose(
-            iconButton.style(!!icon || ["white", "gray"].includes(color)),
-            { height },
-          )
-          .style(color),
-      )}
-    >
+  const className = tw.mergeProps(
+    button.style(["white", "gray"].includes(color)),
+    coloredButton
+      .compose(
+        iconButton.style(!!icon || ["white", "gray"].includes(color)),
+        { height },
+      )
+      .style(color),
+  );
+  const content = (
+    <>
       {icon && <LeftArrow />}
       <span>{children}</span>
-    </button>
+    </>
+  );
+  return to ? (
+    <Link to={to} className={className}>{content}</Link>
+  ) : (
+    <button onClick={onClick} className={className}>{content}</button>
   );
 };
 

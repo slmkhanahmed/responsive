@@ -1,5 +1,17 @@
+import { useHistory } from "react-router-dom";
 import { GetVariants, Tailwindest } from "tailwindest";
 import Button, { coloredButton } from "./Button";
+
+export function useBackToFeedback() {
+  const history = useHistory();
+  return () => {
+    if (history.location.key) {
+      history.goBack();
+    } else {
+      history.replace("/");
+    }
+  };
+}
 
 function BackButton({
   color = "gray",
@@ -10,12 +22,13 @@ function BackButton({
   height?: Tailwindest["height"];
   className?: string;
 }>) {
+  const goBack = useBackToFeedback();
   return (
     <Button
       height={height}
       color={color}
       icon
-      onClick={() => window.history.back()}
+      onClick={goBack}
     >
       {children}
     </Button>

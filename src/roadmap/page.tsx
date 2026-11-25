@@ -177,9 +177,7 @@ export default function Roadmap() {
           </BackButton>
           <span className="text-[18px] font-bold text-white">Roadmap</span>
         </div>
-        <a href={"/new-feedback"}>
-          <Button color="purple">+ Add Feedback</Button>
-        </a>
+        <Button to="/new-feedback" color="purple">+ Add Feedback</Button>
       </div>
       {/* Mobile Tabs */}
       <div className="tablet:hidden">

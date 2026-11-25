@@ -111,7 +111,7 @@ function ReplyForm({
   setShowReplyForm?: (show: boolean) => void;
 }) {
   const [reply, setReply] = useState("");
-  const { 'product-request-id': productRequestId } = useParams<{ 'product-request-id': string }>();
+  const { productRequestId } = useParams<{ productRequestId: string }>();
 
   const { data, setData } = useLocalStorage(initial_data);
 
@@ -225,7 +225,7 @@ const commentarea = tw.style({
 
 export function CommentArea() {
   const [comment, setComment] = useState("");
-  const { 'product-request-id': productRequestId } = useParams<{ 'product-request-id': string }>();
+  const { productRequestId } = useParams<{ productRequestId: string }>();
 
   const { data, setData } = useLocalStorage(initial_data);
 

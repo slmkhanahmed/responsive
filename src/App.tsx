@@ -4,6 +4,7 @@ import PageNotFound from "./components/PageNotFound";
 import EditFeedback from "./edit-feedback/[feedback-id]/page";
 import { Main } from "./Main";
 import NewFeedback from "./new-feedback/page";
+import Roadmap from "./roadmap/page";
 import ProductRequestDetailLayout from "./product-request/[product-request-id]/layout";
 import ProductRequestNotFound from "./product-request/[product-request-id]/not-found";
 import ProductRequestDetail from "./product-request/[product-request-id]/page";
@@ -14,11 +15,12 @@ function App() {
       <Toaster />
       <Router>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Main />
           </Route>
-          <Route path="/new-feedback" children={<NewFeedback />} />
-          <Route path="/edit-feedback/:feedback-id">
+          <Route exact path="/new-feedback" component={NewFeedback} />
+          <Route exact path="/roadmap" component={Roadmap} />
+          <Route exact path="/edit-feedback/:feedbackId">
             <EditFeedback />
           </Route>
           <Route path={"/product-request/not-found"} exact>
@@ -26,12 +28,12 @@ function App() {
               <ProductRequestNotFound />
             </ProductRequestDetailLayout>
           </Route>
-          <Route path="/product-request/:product-request-id">
+          <Route exact path="/product-request/:productRequestId">
             <ProductRequestDetailLayout>
               <ProductRequestDetail />
             </ProductRequestDetailLayout>
           </Route>
-          <Route exact path="/404">
+          <Route>
             <PageNotFound />
           </Route>
         </Switch>

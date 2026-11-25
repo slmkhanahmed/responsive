@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Button from "../../components/Button";
 import { Dropdown } from "../../components/Dropdown";
@@ -68,9 +68,8 @@ const sectionDesc = tw.style({
 //   params: { "feedback-id": string };
 // }
 export default function EditFeedback() {
-  const { "feedback-id": productRequestId } = useParams<{
-    "feedback-id": string;
-  }>();
+  const { feedbackId: productRequestId } = useParams<{ feedbackId: string }>();
+  const history = useHistory();
 
   const { data, setData } = useLocalStorage(initial_data);
   const productRequest = data.productRequests.find(
@@ -92,7 +91,7 @@ export default function EditFeedback() {
     );
     toast.success("Feedback deleted successfully!");
     setData(data);
-    window.history.go(-2);
+    history.replace("/");
   };
   const EditFeedback = () => {
     if (!title || !category || !status) return;

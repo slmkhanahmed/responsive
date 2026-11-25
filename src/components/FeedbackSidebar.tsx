@@ -1,5 +1,5 @@
 
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { useState } from "react";
 import { tw } from "../lib/tailwindest";
 import { CategorySelection } from "./CategorySelection";
@@ -95,7 +95,9 @@ export function FeedbackSidebar() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className={sidebarContainer.class}>
-      <FeedbackAppName menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Suspense fallback={null}>
+        <FeedbackAppName menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      </Suspense>
       <SidebarMenu menuOpen={menuOpen} />
     </div>
   );

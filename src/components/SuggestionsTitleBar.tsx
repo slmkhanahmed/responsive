@@ -49,9 +49,7 @@ export function SuggestionsTitleBar() {
         </div>
         <SortBy />
       </div>
-      <a href={"/new-feedback"}>
-        <Button color="purple">+ Add Feedback</Button>
-      </a>
+      <Button to="/new-feedback" color="purple">+ Add Feedback</Button>
     </div>
   );
 }

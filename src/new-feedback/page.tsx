@@ -3,7 +3,7 @@ import PlusIcon from "../public/plus.svg";
 
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import BackButton from "../components/BackButton";
+import BackButton, { useBackToFeedback } from "../components/BackButton";
 import Button from "../components/Button";
 import { Dropdown } from "../components/Dropdown";
 import { TextField } from "../components/TextField";
@@ -65,6 +65,7 @@ const sectionDesc = tw.style({
 const Categories = ["Feature", "UI", "UX", "Enhancement", "Bug"];
 
 export default function NewFeedback() {
+  const goBack = useBackToFeedback();
   const { data, setData } = useLocalStorage(initial_data);
 
   const [title, setTitle] = useState("");
@@ -161,7 +162,7 @@ export default function NewFeedback() {
           <Button onClick={AddFeedback} color="purple">
             Add Feedback
           </Button>
-          <Button onClick={() => window.history.back()} color="dark-blue">
+          <Button onClick={goBack} color="dark-blue">
             Cancel
           </Button>
         </div>

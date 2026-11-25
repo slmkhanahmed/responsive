@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import initial_data from "../public/data.json";
 import { tw } from "../lib/tailwindest";
 import { BLUE_COLOR, Circle, ORANGE_COLOR, PURPLE_COLOR } from "./Circle";
@@ -54,9 +55,9 @@ export function RoadmapSummary() {
     <div className={summaryContainer.class}>
       <div className={summaryHeader.class}>
         <span className={summaryHeaderTitle.class}>Roadmap</span>
-        <a className={summaryHeaderLink.class} href="/roadmap">
+        <Link className={summaryHeaderLink.class} to="/roadmap">
           View
-        </a>
+        </Link>
       </div>
 
       <div>

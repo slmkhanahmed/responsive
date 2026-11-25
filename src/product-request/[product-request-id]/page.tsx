@@ -3,6 +3,7 @@ import { ProductRequest } from "../../components/ProductRequest";
 import { tw } from "../../lib/tailwindest";
 import initial_data from "../../public/data.json";
 import { Redirect, useParams } from "react-router-dom";
+import { useLocalStorage } from "../../lib/useLocalStorage";
 
 
 const form = tw.style({
@@ -28,8 +29,9 @@ const comments = tw.style({
 });
 
 const ProductRequestDetail = () => {
-  const { 'product-request-id': productRequestId } = useParams<{'product-request-id': string}>();
-  const productRequest = initial_data.productRequests.find(
+  const { productRequestId } = useParams<{ productRequestId: string }>();
+  const { data } = useLocalStorage(initial_data);
+  const productRequest = data.productRequests.find(
     (pr) => pr.id.toString() === productRequestId,
   );
   if (!productRequest) {

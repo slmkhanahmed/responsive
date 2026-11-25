@@ -25,9 +25,9 @@ export function Navbar({ productRequestId }: { productRequestId: string }) {
     <div className={navbar.class}>
       <BackButton color="gray">Go Back</BackButton>
       {productRequest && (
-        <a href={`/edit-feedback/${productRequestId}`}>
-          <Button color="blue">Edit Feedback</Button>
-        </a>
+        <Button to={`/edit-feedback/${productRequestId}`} color="blue">
+          Edit Feedback
+        </Button>
       )}
     </div>
   );

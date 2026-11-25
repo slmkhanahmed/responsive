@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 import commentIcon from "../public/comment.svg";
 import initial_data from "../public/data.json";
@@ -107,16 +108,16 @@ export function ProductRequest({
           {productRequest.upvotes.toString()}
         </LinkButton>
       </div>
-      <a
+      <Link
         className={requestLink.class}
         key={productRequest.id}
-        href={`/product-request/${productRequest.id}`}
+        to={`/product-request/${productRequest.id}`}
       >
         <div className={titleLink.class}>
           <h2>{productRequest.title}</h2>
           <p className="text-gray-dark">{productRequest.description}</p>
         </div>
-      </a>
+      </Link>
       <div className={category.class}>
         <CategorySelector category={productRequest.category} />
       </div>
